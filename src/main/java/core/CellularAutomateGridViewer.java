@@ -15,6 +15,7 @@ public class CellularAutomateGridViewer<T> extends JPanel {
         this.size = size;
         this.drawer = drawer;
         this.showGrid = showGrid;
+        setPrefDim();
     }
 
     @Override
@@ -38,7 +39,9 @@ public class CellularAutomateGridViewer<T> extends JPanel {
     }
 
     private void setPrefDim(){
-        this.setMaximumSize( new Dimension(size*grid.getW(), size*grid.getH()+35 ));
+        Dimension dim = new Dimension(size*grid.getW(), size*grid.getH()+35 );
+        this.setPreferredSize(dim);
+        this.setMaximumSize(dim);
     }
 
     public void setSize(int size) {
