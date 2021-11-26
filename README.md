@@ -6,7 +6,7 @@ Vous pouvez passer une cellule à vivante en appuyant sur le bouton gauche de la
 ## Forst Fire
 Vous pouvez enflamer une cellule en appuyant sur le bouton gauche de la souris.
 
-##Wire World
+## Wire World
 bouton gauche -> passe la cellule en conductrice
 bouton droit -> passe la cellule en electron
 bouton milieu -> passe la cellule en VOID
