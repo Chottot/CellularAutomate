@@ -27,7 +27,6 @@ public class ColorRangerDrawer<T extends Comparable<T>> implements ICellularAuto
     @Override
     public Color getCellColor(CellularAutomateGrid<T> grid, int cellY, int cellX) {
         T cell = grid.grid[cellY][cellX];
-
         return colorMap.floorEntry(cell).getValue();
     }
 }
