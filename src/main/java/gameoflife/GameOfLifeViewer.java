@@ -21,12 +21,14 @@ public class GameOfLifeViewer extends CellularAutomateViewer<Boolean> {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        System.out.println("test : "+ e.getButton());
         grid.getGrid()[e.getY()/getGridSize()][e.getX()/getGridSize()] = true;
         this.repaint();
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        System.out.println("test : "+ e.getButton());
         grid.getGrid()[e.getY()/getGridSize()][e.getX()/getGridSize()] = true;
         this.repaint();
     }

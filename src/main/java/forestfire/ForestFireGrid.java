@@ -8,6 +8,10 @@ public class ForestFireGrid extends CellularAutomateGrid<ForestFireCell> {
         super(grid, new ForestFireRule());
     }
 
+    public ForestFireGrid(int width, int height){
+        super (width, height, new ForestFireRule());
+    }
+
     @Override
     public void initGrid() {
 

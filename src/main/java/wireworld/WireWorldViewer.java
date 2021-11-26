@@ -23,6 +23,11 @@ public class WireWorldViewer extends CellularAutomateViewer<WireWorldState> {
     }
 
     @Override
+    public void mouseClicked(MouseEvent e){
+        System.out.println("test: "+e.getButton());
+    }
+
+    @Override
     public void mousePressed(MouseEvent e) {
         WireWorldState state = WireWorldState.CONDUCTOR;
         System.out.println("test: "+e.getButton());
@@ -37,6 +42,7 @@ public class WireWorldViewer extends CellularAutomateViewer<WireWorldState> {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        System.out.println("test: "+e.getButton());
         grid.getGrid()[e.getY()/getGridSize()][e.getX()/getGridSize()] = WireWorldState.CONDUCTOR;
         this.repaint();
     }

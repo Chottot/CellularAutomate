@@ -1,4 +1,7 @@
+import core.CellularAutomateGridViewer;
 import core.CellularAutomateViewer;
+import forestfire.ForestFireGrid;
+import forestfire.ForestFireViewer;
 import gameoflife.GameOfLifeGrid;
 import gameoflife.GameOfLifeViewer;
 import wireworld.WireWorldGrid;
@@ -18,58 +21,15 @@ import java.util.Random;
 public class Main extends JFrame{
 
     public static void main( String[] args){
-       /* JFrame frame = new JFrame("Jeux de la vie");
-        frame.setResizable(true);
-
-        int height = 20;
-        int width = 40;
-        int nb = 5;
-        Random rand = new Random();*/
-
-       /* Boolean[][] tab = new Boolean[height][width];
-        for(int y = 0; y<height; y++){
-            for (int x = 0; x<width; x++){
-                tab[y][x] = Boolean.FALSE;
-            }
-        }
-
-        for(int i = 0; i < nb; i++){
-            tab[rand.nextInt(height)][rand.nextInt(width)] = Boolean.TRUE;
-        }
-
-        GameOfLifeGrid grid = new GameOfLifeGrid(tab);
-        CellularAutomateViewer<?> game = new GameOfLifeViewer(grid, 50);*/
-
-        /*ForestFireCell[][] tab = new ForestFireCell[height][width];
-        for(int y = 0; y<height; y++){
-            for (int x = 0; x<width; x++){
-                if(rand.nextBoolean()){
-                    tab[y][x] = ForestFireCell.FOREST;
-                }else{
-                    tab[y][x] = ForestFireCell.NONE;
-                }
-            }
-        }
-
-        ForestFireGrid grid = new ForestFireGrid(tab);
-        CellularAutomateViewer<?> game = new ForestFireViewer(grid, 25);*/
-
-        /*int max = 3;
-        WireWorldState[][] tab = new WireWorldState[height][width];
-        for(int y = 0; y<height; y++){
-            for(int x = 0; x<width; x++){
-                tab[y][x] = WireWorldState.VOID;
-            }
-        }
-        WireWorldGrid grid = new WireWorldGrid(tab);
-        CellularAutomateViewer<?> game = new WireWorldViewer(grid, 50);
-
-        frame.add( game, BorderLayout.CENTER);
-        frame.pack();*/
         Main m = new Main();
     }
 
+    private static final String gameOfLifeStr = "Game Of Life";
+    private static final String forestFireStr = "Forest Fire";
+    private static final String wireWorldStr = "Wire World";
+
     private CellularAutomateViewer<?> currentGame;
+
 
     public Main() throws HeadlessException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,6 +39,9 @@ public class Main extends JFrame{
         gameControl.setLayout(new GridLayout(0, 2, 10, 10));
 
         JComboBox<String> gameCombo = new JComboBox<>();
+        gameCombo.addItem(Main.gameOfLifeStr);
+        gameCombo.addItem(Main.forestFireStr);
+        gameCombo.addItem(Main.wireWorldStr);
         gameControl.add(new JLabel("select game:"));
         gameControl.add(gameCombo);
 
@@ -121,15 +84,44 @@ public class Main extends JFrame{
             if(height <= 0){
                 return;
             }
-            GameOfLifeGrid grid = new GameOfLifeGrid(width, height);
-            GameOfLifeViewer game = new GameOfLifeViewer(grid, scale.getValue());
-            game.setShowGrid(showGrid.isSelected());
 
-            if(currentGame != null)
-                remove(currentGame);
+            if(gameCombo.getSelectedItem().equals(Main.gameOfLifeStr)){
+                GameOfLifeGrid grid = new GameOfLifeGrid(width, height);
+                GameOfLifeViewer game = new GameOfLifeViewer(grid, scale.getValue());
 
-            add(game, BorderLayout.CENTER);
-            currentGame = game;
+                game.setShowGrid(showGrid.isSelected());
+
+                if(currentGame != null)
+                    remove(currentGame);
+
+                add(game, BorderLayout.CENTER);
+                currentGame = game;
+
+            }else  if(gameCombo.getSelectedItem().equals(Main.wireWorldStr)) {
+                WireWorldGrid grid = new WireWorldGrid(width, height);
+                WireWorldViewer game = new WireWorldViewer(grid, scale.getValue());
+
+                game.setShowGrid(showGrid.isSelected());
+
+                if(currentGame != null)
+                    remove(currentGame);
+
+                add(game, BorderLayout.CENTER);
+                currentGame = game;
+
+            }else if(gameCombo.getSelectedItem().equals(Main.forestFireStr)){
+                ForestFireGrid grid = new ForestFireGrid(width, height);
+                ForestFireViewer game = new ForestFireViewer(grid, scale.getValue());
+
+                game.setShowGrid(showGrid.isSelected());
+
+                if(currentGame != null)
+                    remove(currentGame);
+
+                add(game, BorderLayout.CENTER);
+                currentGame = game;
+            }
+
             pack();
         });
 
@@ -142,6 +134,7 @@ public class Main extends JFrame{
 
         GameOfLifeGrid grid = new GameOfLifeGrid(20, 20);
         currentGame = new GameOfLifeViewer(grid, 25);
+
         this.add(currentGame, BorderLayout.CENTER);
         pack();
         setVisible(true);
